@@ -19,6 +19,9 @@ public class Main {
 		List<MainJson> data = readJsonData();
 		writeDataToCsvAtOnce(data, "D:\\test\\test2.csv"); 
 	}
+	
+	
+	
 
 	public static List<MainJson> readJsonData() throws Exception {
 
