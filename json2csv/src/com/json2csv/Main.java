@@ -16,28 +16,24 @@ import com.opencsv.CSVWriter;
 public class Main {
 
 	public static void main(String[] args) throws Exception {
-		new Main().main() ;
+		List<MainJson> data = readJsonData();
+		writeDataToCsvAtOnce(data, "D:\\test\\test2.csv"); 
 	}
 
-	public  void main() throws Exception {
+	public static List<MainJson> readJsonData() throws Exception {
 
 		ObjectMapper mapper = new ObjectMapper();
 
 		FileInputStream fis = new 
 				FileInputStream("src/main/resources/sai.json");
-		// MainJson json1 = mapper.readValue(fis, MainJson.class);
 
 		List<MainJson> data = mapper.readValue(fis, TypeFactory.defaultInstance()
 				.constructCollectionType(List.class, MainJson.class));
 
-		System.out.println(data);
-
-		writeDataAtOnce(data, "D:\\test\\test2.csv"); 
+		return data;
 	}
 
-	public static void writeDataAtOnce(List<MainJson> jsonData, String filePath) 
-	{ 
-
+	public static void writeDataToCsvAtOnce(List<MainJson> jsonData, String filePath) { 
 		// first create file object for file placed at location 
 		// specified by filepath 
 		File file = new File(filePath); 
@@ -54,15 +50,13 @@ public class Main {
 			data.add(new String[] { "Name", "Version", "Alias", "OrgUnitId" }); 
 			for (MainJson obj : jsonData) {
 				for (OrgUnitId orgUnitId : obj.getOrgUnitIds()) {
-				data.add(new String[] { obj.getId().getName(), obj.getId().getVersion().toString(), obj.getId().getAlias(), orgUnitId.get$oid() }); 
+					data.add(new String[] { obj.getId().getName(), obj.getId().getVersion().toString(), obj.getId().getAlias(), orgUnitId.get$oid() }); 
+				}
 			}
-			}
-			writer.writeAll(data); 
-
+			writer.writeAll(data);
 			// closing writer connection 
 			writer.close(); 
-		} 
-		catch (IOException e) { 
+		} catch (IOException e) { 
 			// TODO Auto-generated catch block 
 			e.printStackTrace(); 
 		} 
