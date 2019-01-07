@@ -3,7 +3,6 @@ package com.json2csv;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Set;
 
 import org.bson.Document;
 

@@ -7,11 +7,20 @@ import com.mongodb.MongoClientURI;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 
+/**
+ * Utility class for Mongo DB.
+ * 
+ * @author Anil
+ *
+ */
 public class MongoDBUtil {
 
+	/**
+	 * Creates Mongo DB Client
+	 * @return MongoClient
+	 */
 	public static MongoClient getMongoClient() {
 		MongoClient mongoClient = null;
-		MongoCollection<Document> collection = null;
 		try {
 			MongoClientURI uri = new MongoClientURI(
 					// "mongodb+srv://system:tiger@cluster0-0r7hr.mongodb.net/test?retryWrites=true"
@@ -25,6 +34,14 @@ public class MongoDBUtil {
 		return mongoClient;
 	}
 
+	/**
+	 * Gets connection to mongo DB based on client, database name, and collection name
+	 * 
+	 * @param mongoClient
+	 * @param dataBaseName
+	 * @param collectionName
+	 * @return MongoCollection<Document>
+	 */
 	public static MongoCollection<Document> getMongoCollection(
 			MongoClient mongoClient, String dataBaseName, String collectionName) {
 		MongoDatabase database = mongoClient.getDatabase(dataBaseName);
