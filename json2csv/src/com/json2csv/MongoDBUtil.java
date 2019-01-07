@@ -12,8 +12,6 @@ import com.mongodb.client.MongoDatabase;
 /**
  * Utility class for Mongo DB.
  * 
- * @author Anil
- * 
  */
 public class MongoDBUtil {
 
