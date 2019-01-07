@@ -62,9 +62,9 @@ public class MongoDBUtil {
 	 * @param collectionName
 	 * @return DBCollection
 	 */
+	@SuppressWarnings("deprecation")
 	public static DBCollection getDBCollection(
 			MongoClient mongoClient, String dataBaseName, String collectionName) {
-		MongoDatabase database = mongoClient.getDatabase(dataBaseName);
 		DB db = mongoClient.getDB(dataBaseName);
 		DBCollection collection = db.getCollection(collectionName); 
 		return collection;
