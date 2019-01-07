@@ -24,15 +24,19 @@ public class MongoIndexUsageByQueryPlanner {
 			List<BasicDBObject> queries = buildAllPossibleQueries();
 
 			for (BasicDBObject query : queries) {
-
+			String indexName = "NULL";
 				try (DBCursor cursor = collection.find(query)) {
-
 					DBObject obj = cursor.explain();
 					DBObject executionStats = (DBObject)obj.get("executionStats");
-					DBObject executionStages = (DBObject)executionStats.get("executionStages");
-					DBObject inputStage = (DBObject)executionStages.get("inputStage");
-					String indexName = (String)inputStage.get("indexName");
-
+					if (null != executionStats) {
+						DBObject executionStages = (DBObject)executionStats.get("executionStages");
+						if (null != executionStages) {
+							DBObject inputStage = (DBObject)executionStages.get("inputStage");
+							if (null != inputStage) {
+								indexName = (String)inputStage.get("indexName");
+							}
+						}
+					}
 					result.append("Query: " + query);
 					result.append("\n");
 					result.append("Index: " + indexName);
