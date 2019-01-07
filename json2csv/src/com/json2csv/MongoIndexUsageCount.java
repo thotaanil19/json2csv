@@ -13,7 +13,7 @@ import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoCursor;
 import com.opencsv.CSVReader;
 
-public class MongoIndexUsage {
+public class MongoIndexUsageCount {
 
 	public static void main(String[] args) throws Exception {
 		MongoClient mongoClient = null;
@@ -29,9 +29,9 @@ public class MongoIndexUsage {
 			List<BasicDBObject> list = new ArrayList<>();
 			list.add(basicDBObject);
 
-			AggregateIterable<Document> r = collection.aggregate(list);
+			AggregateIterable<Document> aggregateIterable = collection.aggregate(list);
 			
-			MongoCursor<Document> iterator = r.iterator();
+			MongoCursor<Document> iterator = aggregateIterable.iterator();
 			
 			while (iterator.hasNext()) {
 				Document doc = iterator.next();	
