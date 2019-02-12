@@ -20,6 +20,8 @@ public class MongoIndexUsageByQueryPlanner {
 			mongoClient = MongoDBUtil.getMongoClient();
 			DBCollection collection = MongoDBUtil.getDBCollection(mongoClient, "mongo", "configuration");
 			System.out.println("connection created");
+			
+			
 
 			List<BasicDBObject> queries = buildAllPossibleQueries();
 
@@ -37,7 +39,7 @@ public class MongoIndexUsageByQueryPlanner {
 							}
 						}
 					}
-					result.append("Query: " + query);
+					result.append("Query: db." + collection.getName() + ".find( " + query + ").explain(\"executionStats\")");
 					result.append("\n");
 					result.append("Index: " + indexName);
 					result.append("\n");

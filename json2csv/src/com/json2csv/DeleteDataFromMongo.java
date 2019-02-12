@@ -24,7 +24,7 @@ public class DeleteDataFromMongo {
 			System.out.println("connection created");
 
 			System.out.println(collection.countDocuments());
-
+			
 			Reader reader = new InputStreamReader(new FileInputStream(
 					"src/main/resources/sai.csv"));
 
